@@ -39,4 +39,40 @@ require_relative '../models/address_book'
      end
    end
 
+    describe "#remove_entry" do
+      let(:book) { AddressBook.new}
+
+      it "removes only one entry" do
+        book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+        book.add_entry('John Lovelace', '010.012.1816', 'john.king@lovelace.com')
+
+        expect(book.entries.size).to eq(2)
+        p book
+        book.remove_entry('John Lovelace', '010.012.1816', 'john.king@lovelace.com')
+        expect(book.entries.size).to eq(1)
+        p book
+      end
+
+      it "removes the last entry" do
+        book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+        book.add_entry('John Lovelace', '010.012.1816', 'john.king@lovelace.com')
+        entry_one = book.entries[0]
+
+        book.remove_entry('John Lovelace', '010.012.1816', 'john.king@lovelace.com')
+        expect(book.entries[0]).to eq(entry_one)
+        expect(book.entries[1]).to eq(nil)
+        p book
+      end
+
+      it "removes the first entry" do
+        book.add_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+        book.add_entry('John Lovelace', '010.012.1816', 'john.king@lovelace.com')
+        entry_two = book.entries[1]
+
+        book.remove_entry('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
+        expect(book.entries[0]).to eq(entry_two)
+        p book
+      end
+    end
+
  end
