@@ -24,4 +24,12 @@ class AddressBook
       (entry.name == name && entry.phone_number == phone_number && entry.email == email)
     end
   end
+
+  def get_entry_by_num(index)
+    if entries[index] != nil
+      return entries[index]
+    else
+      return nil
+    end
+  end
 end

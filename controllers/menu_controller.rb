@@ -52,10 +52,10 @@ class MenuController
   end
   def view_entry_number(index)
     system "clear"
-    if address_book.entries[index] == nil
+    entry = address_book.get_entry_by_num[index]
+    if entry == nil
       puts "Invalid entry number. Please try again"
     else
-      entry = address_book.entries[index]
       puts "Name: #{entry.name}"
       puts "Phone Number: #{entry.phone_number}"
       puts "Email: #{entry.email}"
