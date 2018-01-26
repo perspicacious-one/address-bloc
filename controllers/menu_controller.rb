@@ -42,6 +42,10 @@ class MenuController
         selection = gets.chomp.to_i
         view_entry_number(selection)
       when 6
+        system "clear"
+        print "Are you sure you want to delete everything? (yes/no): "
+        gets.chomp != 'yes' ? (main_menu) : (nuke)
+      when 7
         puts "Good-bye!"
         exit(0)
       else
@@ -133,9 +137,9 @@ class MenuController
     # #12
     puts "\nd - delete entry"
     puts "e - edit this entry"
-    puts "m - return to main menu\n"
+    puts "m - return to main menu"
 
-    print "Enter your selection: "
+    print "\nEnter your selection: "
     selection = gets.chomp
 
     # #14
@@ -163,9 +167,9 @@ class MenuController
     puts "n - next entry"
     puts "d - delete entry"
     puts "e - edit this entry"
-    puts "m - return to main menu\n"
+    puts "m - return to main menu"
 
-    print "Enter your selection: "
+    print "\nEnter your selection: "
     selection = gets.chomp
 
     case selection
@@ -203,5 +207,15 @@ class MenuController
       puts "#{file_name} is not a valid CSV file, please enter the name of a valid CSV file"
       read_csv
     end
+  end
+
+  def nuke
+    system "clear"
+    size_before = entries.size
+    address_book.remove_all
+    size_after = entries.size
+    
+    "#{size_before} entries deleted. #{size_after} entries remaining."
+    main_menu
   end
 end

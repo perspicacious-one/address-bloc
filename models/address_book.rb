@@ -67,5 +67,10 @@ class AddressBook
   def iterative_search(name)
     entries.map { |entry| (return entry if entry.name == name) }
     return nil
+
+  end
+
+  def remove_all
+    entries.clear
   end
 end
